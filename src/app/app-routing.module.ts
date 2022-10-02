@@ -1,3 +1,5 @@
+import { EditorPageComponent } from './pages/editor-page/editor-page.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -9,7 +11,13 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
-  { path: 'settings', component: SettingsPageComponent },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'editor', component: EditorPageComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({
