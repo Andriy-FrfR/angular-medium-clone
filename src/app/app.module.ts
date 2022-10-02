@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditorPageComponent } from './pages/editor-page/editor-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
     LoginPageComponent,
     SettingsPageComponent,
     EditorPageComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
