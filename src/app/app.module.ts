@@ -1,7 +1,7 @@
 import { NotAuthenticatedGuard } from './shared/guards/not-authenticated.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorPageComponent } from './pages/editor-page/editor-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,15 @@ import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [NotAuthenticatedGuard, AlreadyAuthenticatedGuard],
+  providers: [
+    NotAuthenticatedGuard,
+    AlreadyAuthenticatedGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

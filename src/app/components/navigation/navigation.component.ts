@@ -9,7 +9,5 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
   constructor(public authServ: AuthService) {}
 
-  ngOnInit(): void {
-    console.log(this.authServ.isAuthenticated());
-  }
+  ngOnInit(): void {}
 }
