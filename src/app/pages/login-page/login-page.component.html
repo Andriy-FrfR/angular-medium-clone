@@ -7,26 +7,34 @@
           <a routerLink="/register">Need account?</a>
         </p>
 
-        <ul class="error-messages">
-          <li>That email is already taken</li>
+        <ul class="error-messages" *ngIf="errors.length !== 0">
+          <li *ngFor="let error of errors">{{ error }}</li>
         </ul>
 
-        <form>
-          <fieldset class="form-group">
+        <form [formGroup]="loginForm" (submit)="submitLoginForm()">
+          <fieldset class="form-group" [disabled]="loading">
             <input
               class="form-control form-control-lg"
               type="text"
               placeholder="Email"
+              formControlName="email"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset class="form-group" [disabled]="loading">
             <input
               class="form-control form-control-lg"
               type="password"
               placeholder="Password"
+              formControlName="password"
             />
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right">Log in</button>
+          <button
+            class="btn btn-lg btn-primary pull-xs-right"
+            type="submit"
+            [disabled]="loading"
+          >
+            Log in
+          </button>
         </form>
       </div>
     </div>

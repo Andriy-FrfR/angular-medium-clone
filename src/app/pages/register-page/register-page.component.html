@@ -7,12 +7,12 @@
           <a routerLink="/login">Have an account?</a>
         </p>
 
-        <ul class="error-messages">
-          <li>That email is already taken</li>
+        <ul class="error-messages" *ngIf="errors.length !== 0">
+          <li *ngFor="let error of errors">{{ error }}</li>
         </ul>
 
-        <form [formGroup]="registerForm">
-          <fieldset class="form-group">
+        <form [formGroup]="registerForm" (submit)="submitRegisterForm()">
+          <fieldset class="form-group" [disabled]="loading">
             <input
               class="form-control form-control-lg"
               type="text"
@@ -20,7 +20,7 @@
               formControlName="name"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset class="form-group" [disabled]="loading">
             <input
               class="form-control form-control-lg"
               type="email"
@@ -28,7 +28,7 @@
               formControlName="email"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset class="form-group" [disabled]="loading">
             <input
               class="form-control form-control-lg"
               type="password"
@@ -36,7 +36,13 @@
               formControlName="password"
             />
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right">Sign up</button>
+          <button
+            class="btn btn-lg btn-primary pull-xs-right"
+            type="submit"
+            [disabled]="loading"
+          >
+            Sign up
+          </button>
         </form>
       </div>
     </div>
