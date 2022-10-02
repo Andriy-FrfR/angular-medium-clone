@@ -1,4 +1,4 @@
-import { TagsResponseInterface } from './../../../../shared/interfaces/tags-response.interface';
+import { TagsResponse } from './../../../../shared/interfaces/tags-response.interface';
 import { TagsService } from './../../../../shared/services/tags.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     this.loading = true;
 
     this.tagsServ.getTags().subscribe({
-      next: (res: TagsResponseInterface) => {
+      next: (res: TagsResponse) => {
         this.tags = res.tags;
         this.loading = false;
       },

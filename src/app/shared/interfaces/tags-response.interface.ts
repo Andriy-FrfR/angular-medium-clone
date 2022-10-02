@@ -1,3 +1,3 @@
-export interface TagsResponseInterface {
+export interface TagsResponse {
   tags: string[];
 }

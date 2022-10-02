@@ -1,4 +1,7 @@
+import { ArticlesResponse } from './../../shared/interfaces/articles-response.interface';
+import { ArticlesService } from './../../shared/services/articles.service';
 import { Component, OnInit } from '@angular/core';
+import { Article } from 'src/app/shared/interfaces/article.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -7,7 +10,18 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(public authServ: AuthService) {}
+  articles: Article[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    public authServ: AuthService,
+    private articlesServ: ArticlesService
+  ) {}
+
+  ngOnInit(): void {
+    this.articlesServ.getGlobalFeed().subscribe({
+      next: (res: ArticlesResponse) => {
+        this.articles = res.articles;
+      },
+    });
+  }
 }

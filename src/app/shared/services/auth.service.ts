@@ -1,4 +1,4 @@
-import { AuthResponseInterface } from './../interfaces/auth-response.interface';
+import { AuthResponse } from './../interfaces/auth-response.interface';
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,7 +12,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  setToken(res: AuthResponseInterface): void {
+  setToken(res: AuthResponse): void {
     localStorage.setItem('token', res.user.token);
   }
 
@@ -24,9 +24,9 @@ export class AuthService {
     username: string,
     email: string,
     password: string
-  ): Observable<AuthResponseInterface> {
+  ): Observable<AuthResponse> {
     return this.http
-      .post<AuthResponseInterface>(`${environment.apiBaseUrl}/users`, {
+      .post<AuthResponse>(`${environment.apiBaseUrl}/users`, {
         user: {
           username,
           email,
@@ -36,9 +36,9 @@ export class AuthService {
       .pipe(tap(this.setToken));
   }
 
-  login(email: string, password: string): Observable<AuthResponseInterface> {
+  login(email: string, password: string): Observable<AuthResponse> {
     return this.http
-      .post<AuthResponseInterface>(`${environment.apiBaseUrl}/users/login`, {
+      .post<AuthResponse>(`${environment.apiBaseUrl}/users/login`, {
         user: { email, password },
       })
       .pipe(tap(this.setToken));
