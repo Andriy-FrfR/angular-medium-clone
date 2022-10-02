@@ -1,4 +1,4 @@
-import { AuthGuard } from './shared/guards/auth.guard';
+import { NotAuthenticatedGuard } from './shared/guards/not-authenticated.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorPageComponent } from './pages/editor-page/editor-page.component';
+import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { EditorPageComponent } from './pages/editor-page/editor-page.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthGuard],
+  providers: [NotAuthenticatedGuard, AlreadyAuthenticatedGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
