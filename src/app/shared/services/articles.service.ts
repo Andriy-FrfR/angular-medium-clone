@@ -1,3 +1,4 @@
+import { ArticleResponse } from './../interfaces/article-response.interface';
 import { ArticlesResponse } from './../interfaces/articles-response.interface';
 import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
@@ -23,6 +24,19 @@ export class ArticlesService {
   getArticlesByTag(tag: string): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(
       `${environment.apiBaseUrl}/articles?tag=${tag}`
+    );
+  }
+
+  favoriteArticle(slug: string): Observable<ArticleResponse> {
+    return this.http.post<ArticleResponse>(
+      `${environment.apiBaseUrl}/articles/${slug}/favorite`,
+      {}
+    );
+  }
+
+  unfavoriteArticle(slug: string): Observable<ArticleResponse> {
+    return this.http.delete<ArticleResponse>(
+      `${environment.apiBaseUrl}/articles/${slug}/favorite`
     );
   }
 }
