@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class HomePageComponent implements OnInit {
   articles: Article[] = [];
   loading = false;
+  activeFeed = 'global';
+  activeTag = '';
 
   constructor(
     public authServ: AuthService,
@@ -20,7 +22,17 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchGlobalFeed();
+  }
+
+  private prepareForFetching(feed: string) {
     this.loading = true;
+    this.articles = [];
+    this.activeFeed = feed;
+  }
+
+  fetchGlobalFeed(): void {
+    this.prepareForFetching('global');
 
     this.articlesServ.getGlobalFeed().subscribe({
       next: (res: ArticlesResponse) => {
@@ -35,8 +47,8 @@ export class HomePageComponent implements OnInit {
   }
 
   tagClickHandler(tag: string): void {
-    this.loading = true;
-    this.articles = [];
+    this.prepareForFetching('tag');
+    this.activeTag = tag;
 
     this.articlesServ.getArticlesByTag(tag).subscribe({
       next: (res: ArticlesResponse) => {

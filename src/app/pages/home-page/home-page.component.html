@@ -12,20 +12,26 @@
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item" *ngIf="authServ.isAuthenticated()">
-              <a class="nav-link">Your Feed</a>
+              <a class="nav-link" [class.active]="activeFeed === 'your'">
+                Your Feed
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active">Global Feed</a>
+              <a
+                class="nav-link"
+                [class.active]="activeFeed === 'global'"
+                (click)="fetchGlobalFeed()"
+              >
+                Global Feed
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="activeFeed === 'tag'">
+              <a class="nav-link active">#{{ activeTag }}</a>
             </li>
           </ul>
         </div>
 
-        <div class="article-preview" *ngIf="loading">Loading articles...</div>
-        <div class="article-preview" *ngIf="!loading && articles.length === 0">
-          No articles are here... yet.
-        </div>
-
-        <app-articles [articles]="articles"></app-articles>
+        <app-articles [loading]="loading" [articles]="articles"></app-articles>
       </div>
 
       <div class="col-md-3">

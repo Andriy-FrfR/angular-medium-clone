@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
   @Input('articles') articles: Article[] = [];
+  @Input('loading') loading = false;
 
   constructor() {}
 
