@@ -18,6 +18,7 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
 import { ArticlesComponent } from './pages/home-page/components/articles/articles.component';
 import { LogInterceptor } from './shared/interceptors/log.interceptor';
+import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/feed-toggle.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LogInterceptor } from './shared/interceptors/log.interceptor';
     EditorPageComponent,
     SidebarComponent,
     ArticlesComponent,
+    FeedToggleComponent,
   ],
   imports: [
     BrowserModule,

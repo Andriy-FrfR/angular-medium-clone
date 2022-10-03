@@ -4,12 +4,7 @@ import { ArticlesService } from './../../shared/services/articles.service';
 import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
-enum FeedName {
-  YourFeed = 'YOUR',
-  GlobalFeed = 'GLOBAL',
-  TagFeed = 'TAG',
-}
+import { FeedName } from 'src/app/shared/enums/feed-name.enum';
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +12,6 @@ enum FeedName {
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  FeedName = FeedName;
   articles: Article[] = [];
   loading = false;
   activeFeed: FeedName = FeedName.GlobalFeed;
@@ -85,7 +79,15 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  tagClickHandler(tag: string): void {
+  yourFeedClickHandler(): void {
+    this.fetchYourFeed();
+  }
+
+  globalFeedClickHandler(): void {
+    this.fetchGlobalFeed();
+  }
+
+  tagFeedClickHandler(tag: string): void {
     this.fetchTagFeed(tag);
   }
 }

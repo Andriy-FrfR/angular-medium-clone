@@ -9,7 +9,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  @Output() tagClickEvent = new EventEmitter<string>();
+  @Output() tagFeedClickEvent = new EventEmitter<string>();
   tags: string[] = [];
   loading = false;
 
@@ -30,6 +30,6 @@ export class SidebarComponent implements OnInit {
   }
 
   tagClickHandler(tag: string): void {
-    this.tagClickEvent.emit(tag);
+    this.tagFeedClickEvent.emit(tag);
   }
 }

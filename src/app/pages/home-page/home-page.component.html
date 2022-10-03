@@ -9,37 +9,20 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
-        <div class="feed-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item" *ngIf="authServ.isAuthenticated()">
-              <a
-                class="nav-link"
-                [class.active]="activeFeed === FeedName.YourFeed"
-                (click)="fetchYourFeed()"
-              >
-                Your Feed
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [class.active]="activeFeed === FeedName.GlobalFeed"
-                (click)="fetchGlobalFeed()"
-              >
-                Global Feed
-              </a>
-            </li>
-            <li class="nav-item" *ngIf="activeFeed === FeedName.TagFeed">
-              <a class="nav-link active">#{{ activeTag }}</a>
-            </li>
-          </ul>
-        </div>
+        <app-feed-toggle
+          [activeFeed]="activeFeed"
+          [activeTag]="activeTag"
+          (globalFeedClickEvent)="globalFeedClickHandler()"
+          (yourFeedClickEvent)="yourFeedClickHandler()"
+        ></app-feed-toggle>
 
         <app-articles [loading]="loading" [articles]="articles"></app-articles>
       </div>
 
       <div class="col-md-3">
-        <app-sidebar (tagClickEvent)="tagClickHandler($event)"></app-sidebar>
+        <app-sidebar
+          (tagFeedClickEvent)="tagFeedClickHandler($event)"
+        ></app-sidebar>
       </div>
     </div>
   </div>
