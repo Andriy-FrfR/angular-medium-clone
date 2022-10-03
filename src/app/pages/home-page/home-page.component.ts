@@ -5,15 +5,22 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
+enum FeedName {
+  YourFeed = 'YOUR',
+  GlobalFeed = 'GLOBAL',
+  TagFeed = 'TAG',
+}
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
+  FeedName = FeedName;
   articles: Article[] = [];
   loading = false;
-  activeFeed = 'global';
+  activeFeed: FeedName = FeedName.GlobalFeed;
   activeTag = '';
 
   constructor(
@@ -25,14 +32,29 @@ export class HomePageComponent implements OnInit {
     this.fetchGlobalFeed();
   }
 
-  private prepareForFetching(feed: string) {
+  private prepareForFetching(feed: FeedName): void {
     this.loading = true;
     this.articles = [];
     this.activeFeed = feed;
   }
 
+  fetchYourFeed(): void {
+    this.prepareForFetching(FeedName.YourFeed);
+
+    this.articlesServ.getYourFeed().subscribe({
+      next: (res: ArticlesResponse) => {
+        this.articles = res.articles;
+        this.loading = false;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.loading = false;
+      },
+    });
+  }
+
   fetchGlobalFeed(): void {
-    this.prepareForFetching('global');
+    this.prepareForFetching(FeedName.GlobalFeed);
 
     this.articlesServ.getGlobalFeed().subscribe({
       next: (res: ArticlesResponse) => {
@@ -46,8 +68,8 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  tagClickHandler(tag: string): void {
-    this.prepareForFetching('tag');
+  fetchTagFeed(tag: string): void {
+    this.prepareForFetching(FeedName.TagFeed);
     this.activeTag = tag;
 
     this.articlesServ.getArticlesByTag(tag).subscribe({
@@ -60,5 +82,9 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  tagClickHandler(tag: string): void {
+    this.fetchTagFeed(tag);
   }
 }

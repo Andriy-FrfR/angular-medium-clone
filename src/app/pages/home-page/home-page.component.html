@@ -12,20 +12,24 @@
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item" *ngIf="authServ.isAuthenticated()">
-              <a class="nav-link" [class.active]="activeFeed === 'your'">
+              <a
+                class="nav-link"
+                [class.active]="activeFeed === FeedName.YourFeed"
+                (click)="fetchYourFeed()"
+              >
                 Your Feed
               </a>
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                [class.active]="activeFeed === 'global'"
+                [class.active]="activeFeed === FeedName.GlobalFeed"
                 (click)="fetchGlobalFeed()"
               >
                 Global Feed
               </a>
             </li>
-            <li class="nav-item" *ngIf="activeFeed === 'tag'">
+            <li class="nav-item" *ngIf="activeFeed === FeedName.TagFeed">
               <a class="nav-link active">#{{ activeTag }}</a>
             </li>
           </ul>

@@ -14,6 +14,12 @@ export class ArticlesService {
     );
   }
 
+  getYourFeed(): Observable<ArticlesResponse> {
+    return this.http.get<ArticlesResponse>(
+      `${environment.apiBaseUrl}/articles/feed`
+    );
+  }
+
   getArticlesByTag(tag: string): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(
       `${environment.apiBaseUrl}/articles?tag=${tag}`
