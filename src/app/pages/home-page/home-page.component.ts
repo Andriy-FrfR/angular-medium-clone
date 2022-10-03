@@ -47,7 +47,6 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err);
         this.loading = false;
 
         if (err.status === 401) {
@@ -66,7 +65,6 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err);
         this.loading = false;
       },
     });
@@ -82,7 +80,6 @@ export class HomePageComponent implements OnInit {
         this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err);
         this.loading = false;
       },
     });

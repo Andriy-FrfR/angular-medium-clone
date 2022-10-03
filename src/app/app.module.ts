@@ -17,6 +17,7 @@ import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
 import { ArticlesComponent } from './pages/home-page/components/articles/articles.component';
+import { LogInterceptor } from './shared/interceptors/log.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,11 @@ import { ArticlesComponent } from './pages/home-page/components/articles/article
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LogInterceptor,
       multi: true,
     },
   ],

@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit {
         this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err);
         this.loading = false;
       },
     });
