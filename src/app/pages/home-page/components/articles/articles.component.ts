@@ -12,47 +12,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
   @Input('articles') articles: Article[] = [];
-  @Input('loading') articlesLoading = false;
-  loadingArticles = new WeakSet<Article>();
+  @Input('loading') loading = false;
 
-  constructor(
-    private articlesServ: ArticlesService,
-    private authServ: AuthService,
-    private router: Router
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  toggleFavorited(article: Article): void {
-    if (!this.authServ.isAuthenticated()) {
-      this.router.navigate(['/register']);
-      return;
-    }
-
-    this.loadingArticles.add(article);
-
-    if (article.favorited) {
-      this.articlesServ.unfavoriteArticle(article.slug).subscribe({
-        next: (res: ArticleResponse) => {
-          const articleIdx = this.articles.findIndex(
-            (art: Article) => art.slug === article.slug
-          );
-
-          this.articles[articleIdx] = res.article;
-        },
-        error: () => this.loadingArticles.delete(article),
-      });
-    } else {
-      this.articlesServ.favoriteArticle(article.slug).subscribe({
-        next: (res: ArticleResponse) => {
-          const articleIdx = this.articles.findIndex(
-            (art: Article) => art.slug === article.slug
-          );
-
-          this.articles[articleIdx] = res.article;
-        },
-        error: () => this.loadingArticles.delete(article),
-      });
-    }
-  }
 }

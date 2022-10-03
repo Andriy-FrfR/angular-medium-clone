@@ -1,0 +1,8 @@
+<button
+  class="btn btn-outline-primary btn-sm pull-xs-right"
+  [class.active]="article.favorited"
+  [class.disabled]="loading"
+  (click)="toggleFavorited()"
+>
+  <i class="ion-heart"></i> {{ article.favoritesCount }}
+</button>

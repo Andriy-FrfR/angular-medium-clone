@@ -19,6 +19,7 @@ import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.c
 import { ArticlesComponent } from './pages/home-page/components/articles/articles.component';
 import { LogInterceptor } from './shared/interceptors/log.interceptor';
 import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/feed-toggle.component';
+import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/fe
     SidebarComponent,
     ArticlesComponent,
     FeedToggleComponent,
+    FavoriteButtonComponent,
   ],
   imports: [
     BrowserModule,

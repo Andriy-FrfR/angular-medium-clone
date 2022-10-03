@@ -1,6 +1,6 @@
-<div class="article-preview" *ngIf="articlesLoading">Loading articles...</div>
+<div class="article-preview" *ngIf="loading">Loading articles...</div>
 
-<div class="article-preview" *ngIf="!articlesLoading && articles.length === 0">
+<div class="article-preview" *ngIf="!loading && articles.length === 0">
   No articles are here... yet.
 </div>
 
@@ -17,14 +17,7 @@
         {{ article.createdAt | date: "MMMM dd, yyyy" }}
       </span>
     </div>
-    <button
-      class="btn btn-outline-primary btn-sm pull-xs-right"
-      [class.active]="article.favorited"
-      [class.disabled]="loadingArticles.has(article)"
-      (click)="toggleFavorited(article)"
-    >
-      <i class="ion-heart"></i> {{ article.favoritesCount }}
-    </button>
+    <app-favorite-button [article]="article"></app-favorite-button>
   </div>
   <a [routerLink]="'/article/' + article.slug" class="preview-link">
     <h1>{{ article.title }}</h1>
