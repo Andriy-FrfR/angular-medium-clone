@@ -49,6 +49,10 @@ export class HomePageComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         console.error(err);
         this.loading = false;
+
+        if (err.status === 401) {
+          this.fetchGlobalFeed();
+        }
       },
     });
   }
