@@ -13,4 +13,10 @@ export class ArticlesService {
       `${environment.apiBaseUrl}/articles`
     );
   }
+
+  getArticlesByTag(tag: string): Observable<ArticlesResponse> {
+    return this.http.get<ArticlesResponse>(
+      `${environment.apiBaseUrl}/articles?tag=${tag}`
+    );
+  }
 }

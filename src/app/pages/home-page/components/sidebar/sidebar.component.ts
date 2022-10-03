@@ -1,6 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { TagsResponse } from './../../../../shared/interfaces/tags-response.interface';
 import { TagsService } from './../../../../shared/services/tags.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  @Output() tagClickEvent = new EventEmitter<string>();
   tags: string[] = [];
   loading = false;
 
@@ -21,6 +23,14 @@ export class SidebarComponent implements OnInit {
         this.tags = res.tags;
         this.loading = false;
       },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.loading = false;
+      },
     });
+  }
+
+  tagClickHandler(tag: string): void {
+    this.tagClickEvent.emit(tag);
   }
 }

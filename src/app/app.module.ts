@@ -16,6 +16,7 @@ import { EditorPageComponent } from './pages/editor-page/editor-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
+import { ArticlesComponent } from './pages/home-page/components/articles/articles.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.c
     SettingsPageComponent,
     EditorPageComponent,
     SidebarComponent,
+    ArticlesComponent,
   ],
   imports: [
     BrowserModule,

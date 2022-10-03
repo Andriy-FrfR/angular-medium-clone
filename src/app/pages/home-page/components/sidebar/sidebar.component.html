@@ -2,7 +2,12 @@
   <p>Popular Tags</p>
 
   <div class="tag-list" *ngIf="!loading && tags.length !== 0">
-    <a href="" class="tag-pill tag-default" *ngFor="let tag of tags">
+    <a
+      *ngFor="let tag of tags"
+      (click)="tagClickHandler(tag)"
+      class="tag-pill tag-default"
+      routerLink=""
+    >
       {{ tag }}
     </a>
   </div>

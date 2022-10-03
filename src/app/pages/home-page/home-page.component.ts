@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ArticlesResponse } from './../../shared/interfaces/articles-response.interface';
 import { ArticlesService } from './../../shared/services/articles.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HomePageComponent implements OnInit {
   articles: Article[] = [];
+  loading = false;
 
   constructor(
     public authServ: AuthService,
@@ -18,9 +20,32 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
+
     this.articlesServ.getGlobalFeed().subscribe({
       next: (res: ArticlesResponse) => {
         this.articles = res.articles;
+        this.loading = false;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.loading = false;
+      },
+    });
+  }
+
+  tagClickHandler(tag: string): void {
+    this.loading = true;
+    this.articles = [];
+
+    this.articlesServ.getArticlesByTag(tag).subscribe({
+      next: (res: ArticlesResponse) => {
+        this.articles = res.articles;
+        this.loading = false;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.loading = false;
       },
     });
   }
