@@ -12,6 +12,7 @@ import { ArticleResponse } from '../../interfaces/article-response.interface';
 })
 export class FavoriteButtonComponent implements OnInit {
   @Input('article') article!: Article;
+  @Input('is-in-feed') isInFeed = true;
   loading = false;
 
   constructor(
@@ -33,7 +34,7 @@ export class FavoriteButtonComponent implements OnInit {
     if (this.article.favorited) {
       this.articlesServ.unfavoriteArticle(this.article.slug).subscribe({
         next: (res: ArticleResponse) => {
-          this.article = res.article;
+          Object.assign(this.article, res.article);
           this.loading = false;
         },
         error: () => (this.loading = false),
@@ -41,7 +42,7 @@ export class FavoriteButtonComponent implements OnInit {
     } else {
       this.articlesServ.favoriteArticle(this.article.slug).subscribe({
         next: (res: ArticleResponse) => {
-          this.article = res.article;
+          Object.assign(this.article, res.article);
           this.loading = false;
         },
         error: () => (this.loading = false),

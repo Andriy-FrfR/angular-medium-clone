@@ -1,3 +1,5 @@
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ArticlePageComponent } from './pages/article-page/article-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
 import { EditorPageComponent } from './pages/editor-page/editor-page.component';
 import { NotAuthenticatedGuard } from './shared/guards/not-authenticated.guard';
@@ -10,6 +12,14 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
+  {
+    path: 'article/:slug',
+    component: ArticlePageComponent,
+  },
+  {
+    path: 'profile/:username',
+    component: ProfilePageComponent,
+  },
   {
     path: 'login',
     component: LoginPageComponent,

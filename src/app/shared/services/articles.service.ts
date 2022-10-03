@@ -9,6 +9,12 @@ import { Injectable } from '@angular/core';
 export class ArticlesService {
   constructor(private http: HttpClient) {}
 
+  getArticleBySlug(slug: string): Observable<ArticleResponse> {
+    return this.http.get<ArticleResponse>(
+      `${environment.apiBaseUrl}/articles/${slug}`
+    );
+  }
+
   getGlobalFeed(): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(
       `${environment.apiBaseUrl}/articles`

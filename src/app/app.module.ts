@@ -20,6 +20,9 @@ import { ArticlesComponent } from './pages/home-page/components/articles/article
 import { LogInterceptor } from './shared/interceptors/log.interceptor';
 import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/feed-toggle.component';
 import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component';
+import { ArticlePageComponent } from './pages/article-page/article-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FollowButtonComponent } from './shared/components/follow-button/follow-button.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { FavoriteButtonComponent } from './shared/components/favorite-button/fav
     ArticlesComponent,
     FeedToggleComponent,
     FavoriteButtonComponent,
+    ArticlePageComponent,
+    ProfilePageComponent,
+    FollowButtonComponent,
   ],
   imports: [
     BrowserModule,

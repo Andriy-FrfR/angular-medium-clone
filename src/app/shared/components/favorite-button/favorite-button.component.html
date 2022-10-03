@@ -1,8 +1,17 @@
 <button
-  class="btn btn-outline-primary btn-sm pull-xs-right"
+  class="btn btn-outline-primary btn-sm"
+  [class.pull-xs-right]="isInFeed"
   [class.active]="article.favorited"
   [class.disabled]="loading"
   (click)="toggleFavorited()"
 >
-  <i class="ion-heart"></i> {{ article.favoritesCount }}
+  <span *ngIf="isInFeed">
+    <i class="ion-heart"></i> {{ article.favoritesCount }}
+  </span>
+  <span *ngIf="!isInFeed">
+    <i class="ion-heart"></i>&nbsp;
+    <span *ngIf="!article.favorited">Favorite</span>
+    <span *ngIf="article.favorited">Unfavorite</span>
+    Article ({{ article.favoritesCount }})
+  </span>
 </button>
