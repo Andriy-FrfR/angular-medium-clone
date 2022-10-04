@@ -7,7 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./errors-list.component.scss'],
 })
 export class ErrorsListComponent implements OnInit {
-  @Input('error') set error(httpError: HttpErrorResponse) {
+  @Input('error') set error(httpError: HttpErrorResponse | undefined) {
+    if (!httpError) {
+      return;
+    }
+
     const newErrors: string[] = [];
 
     Object.keys(httpError.error.errors).forEach((errorKey) => {

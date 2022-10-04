@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ArticleResponse } from './../../shared/interfaces/article-response.interface';
 import { Article } from './../../shared/interfaces/article.interface';
 import { ArticlesService } from './../../shared/services/articles.service';
@@ -14,7 +15,8 @@ export class ArticlePageComponent implements OnInit {
 
   constructor(
     private articlesServ: ArticlesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public authServ: AuthService
   ) {}
 
   ngOnInit(): void {

@@ -34,6 +34,12 @@ export class ArticlesService {
     );
   }
 
+  deleteArticle(slug: string): Observable<never> {
+    return this.http.delete<never>(
+      `${environment.apiBaseUrl}/articles/${slug}`
+    );
+  }
+
   getGlobalFeed(): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(
       `${environment.apiBaseUrl}/articles`

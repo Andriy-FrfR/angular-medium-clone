@@ -18,12 +18,22 @@
             {{ article.createdAt | date: "MMMM dd, yyyy" }}
           </span>
         </div>
-        <app-follow-button [article]="article"></app-follow-button>
+
+        <app-follow-button
+          [article]="article"
+          *ngIf="authServ.currentUser?.username !== article.author.username"
+        ></app-follow-button>
         &nbsp;&nbsp;
         <app-favorite-button
           [article]="article"
           [is-in-feed]="false"
+          *ngIf="authServ.currentUser?.username !== article.author.username"
         ></app-favorite-button>
+
+        <app-delete-article-button
+          [article]="article"
+          *ngIf="authServ.currentUser?.username === article.author.username"
+        ></app-delete-article-button>
       </div>
     </div>
   </div>
@@ -64,12 +74,21 @@
           </span>
         </div>
 
-        <app-follow-button [article]="article"></app-follow-button>
+        <app-follow-button
+          [article]="article"
+          *ngIf="authServ.currentUser?.username !== article.author.username"
+        ></app-follow-button>
         &nbsp;
         <app-favorite-button
           [article]="article"
           [is-in-feed]="false"
+          *ngIf="authServ.currentUser?.username !== article.author.username"
         ></app-favorite-button>
+
+        <app-delete-article-button
+          [article]="article"
+          *ngIf="authServ.currentUser?.username === article.author.username"
+        ></app-delete-article-button>
       </div>
     </div>
 
