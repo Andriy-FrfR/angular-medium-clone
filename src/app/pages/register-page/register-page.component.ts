@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent implements OnInit {
   registerForm!: FormGroup;
-  errors: string[] = [];
+  error!: HttpErrorResponse;
   loading = false;
 
   constructor(private authServ: AuthService, private router: Router) {}
@@ -38,15 +38,7 @@ export class RegisterPageComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (httpError: HttpErrorResponse) => {
-          const newErrors: string[] = [];
-
-          Object.keys(httpError.error.errors).forEach((errorKey) => {
-            httpError.error.errors[errorKey].forEach((errorMessage: string) => {
-              newErrors.push(`${errorKey} ${errorMessage}`);
-            });
-          });
-
-          this.errors = newErrors;
+          this.error = httpError;
           this.loading = false;
         },
       });

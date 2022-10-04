@@ -7,9 +7,7 @@
           <a routerLink="/register">Need account?</a>
         </p>
 
-        <ul class="error-messages" *ngIf="errors.length !== 0">
-          <li *ngFor="let error of errors">{{ error }}</li>
-        </ul>
+        <app-errors-list [error]="error"></app-errors-list>
 
         <form [formGroup]="loginForm" (submit)="submitLoginForm()">
           <fieldset class="form-group" [disabled]="loading">

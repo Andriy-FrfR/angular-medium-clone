@@ -15,6 +15,25 @@ export class ArticlesService {
     );
   }
 
+  createArticle(
+    title: string,
+    description: string,
+    body: string,
+    tagList: string[]
+  ): Observable<ArticleResponse> {
+    return this.http.post<ArticleResponse>(
+      `${environment.apiBaseUrl}/articles`,
+      {
+        article: {
+          title,
+          description,
+          body,
+          tagList,
+        },
+      }
+    );
+  }
+
   getGlobalFeed(): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(
       `${environment.apiBaseUrl}/articles`

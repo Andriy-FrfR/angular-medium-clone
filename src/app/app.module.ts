@@ -25,6 +25,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { FollowButtonComponent } from './shared/components/follow-button/follow-button.component';
 import { CommentFormComponent } from './pages/article-page/components/comment-form/comment-form.component';
 import { CommentsComponent } from './pages/article-page/components/comments/comments.component';
+import { ErrorsListComponent } from './shared/components/errors-list/errors-list.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CommentsComponent } from './pages/article-page/components/comments/comm
     FollowButtonComponent,
     CommentFormComponent,
     CommentsComponent,
+    ErrorsListComponent,
   ],
   imports: [
     BrowserModule,
