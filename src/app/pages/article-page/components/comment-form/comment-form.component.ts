@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../shared/services/auth.service';
 import { CommentResponse } from './../../../../shared/interfaces/comment-response.interface';
 import { CommentsService } from './../../../../shared/services/comments.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,7 +15,10 @@ export class CommentFormComponent implements OnInit {
   commentForm!: FormGroup;
   loading = false;
 
-  constructor(private commentsServ: CommentsService) {}
+  constructor(
+    private commentsServ: CommentsService,
+    public authServ: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.commentForm = new FormGroup({ comment: new FormControl(null) });

@@ -2,6 +2,7 @@
   class="card comment-form"
   [formGroup]="commentForm"
   (submit)="commentFormSubmit()"
+  *ngIf="authServ.isAuthenticated()"
 >
   <div class="card-block">
     <textarea
@@ -18,3 +19,8 @@
     </button>
   </div>
 </form>
+
+<p *ngIf="!authServ.isAuthenticated()">
+  <a routerLink="/login">Sign in</a> or <a routerLink="/register">sign up</a> to
+  add comments on this article.
+</p>
