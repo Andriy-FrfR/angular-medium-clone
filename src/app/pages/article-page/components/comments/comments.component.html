@@ -23,7 +23,7 @@
     </span>
     <span
       class="mod-options"
-      *ngIf="comment.author.username === authServ.username"
+      *ngIf="authServ.currentUser?.username === comment.author.username"
     >
       <i class="ion-trash-a" (click)="deleteCommentHandler(comment)"></i>
     </span>

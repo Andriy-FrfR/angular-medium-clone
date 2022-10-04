@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.authServ.isAuthenticated()) {
+    if (this.authServ.token) {
       req = req.clone({
         setHeaders: { Authorization: `Token ${this.authServ.token}` },
       });
@@ -28,8 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.authServ.removeToken();
-          this.authServ.removeUsername();
-          this.router.navigate(['/']);
+          this.authServ.removeCurrentUser();
+
+          if (!req.headers.has('skipAuthInterceptor')) {
+            this.router.navigate(['/']);
+          }
         }
 
         return throwError(() => err);
