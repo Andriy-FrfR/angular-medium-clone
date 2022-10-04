@@ -23,6 +23,8 @@ import { FavoriteButtonComponent } from './shared/components/favorite-button/fav
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { FollowButtonComponent } from './shared/components/follow-button/follow-button.component';
+import { CommentFormComponent } from './pages/article-page/components/comment-form/comment-form.component';
+import { CommentsComponent } from './pages/article-page/components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { FollowButtonComponent } from './shared/components/follow-button/follow-
     ArticlePageComponent,
     ProfilePageComponent,
     FollowButtonComponent,
+    CommentFormComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

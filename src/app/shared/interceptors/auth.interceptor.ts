@@ -28,6 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.authServ.removeToken();
+          this.authServ.removeUsername();
           this.router.navigate(['/']);
         }
 
