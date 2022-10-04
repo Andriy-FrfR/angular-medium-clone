@@ -1,4 +1,4 @@
-<div class="card" *ngFor="let comment of comments">
+<div class="card" *ngFor="let comment of comments.reverse()">
   <div class="card-block">
     <p class="card-text">
       {{ comment.body }}
