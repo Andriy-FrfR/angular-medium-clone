@@ -83,6 +83,10 @@ export class HomePageComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
+
+        if (err.status === 401) {
+          this.fetchGlobalFeed();
+        }
       },
     });
   }
