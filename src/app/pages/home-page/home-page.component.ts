@@ -14,7 +14,7 @@ import { FeedName } from 'src/app/shared/enums/feed-name.enum';
 export class HomePageComponent implements OnInit {
   articles: Article[] = [];
   loading = false;
-  activeFeed: FeedName = FeedName.GlobalFeed;
+  activeFeed!: FeedName;
   activeTag = '';
 
   constructor(
@@ -23,7 +23,11 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchGlobalFeed();
+    if (this.authServ.isAuthenticated()) {
+      this.fetchYourFeed();
+    } else {
+      this.fetchGlobalFeed();
+    }
   }
 
   private prepareForFetching(feed: FeedName): void {
