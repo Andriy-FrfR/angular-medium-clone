@@ -34,6 +34,18 @@ export class ArticlesService {
     );
   }
 
+  updateArticle(
+    slug: string,
+    title: string,
+    description: string,
+    body: string
+  ): Observable<ArticleResponse> {
+    return this.http.put<ArticleResponse>(
+      `${environment.apiBaseUrl}/articles/${slug}`,
+      { article: { title, description, body } }
+    );
+  }
+
   deleteArticle(slug: string): Observable<never> {
     return this.http.delete<never>(
       `${environment.apiBaseUrl}/articles/${slug}`

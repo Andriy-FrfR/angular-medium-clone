@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ArticleResponse } from './../../shared/interfaces/article-response.interface';
 import { ArticlesService } from './../../shared/services/articles.service';
@@ -13,9 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class EditorPageComponent implements OnInit {
   articleForm!: FormGroup;
   error!: HttpErrorResponse;
+  slug!: string;
   loading = false;
 
-  constructor(private articleServ: ArticlesService, private router: Router) {}
+  constructor(
+    private articleServ: ArticlesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.articleForm = new FormGroup({
@@ -23,6 +28,30 @@ export class EditorPageComponent implements OnInit {
       description: new FormControl(null),
       body: new FormControl(null),
       tagList: new FormControl(null),
+    });
+
+    this.route.params.subscribe((params: Params) => {
+      if (!params['slug']) {
+        return;
+      }
+
+      this.slug = params['slug'];
+      this.loading = true;
+
+      this.articleServ
+        .getArticleBySlug(params['slug'])
+        .subscribe((res: ArticleResponse) => {
+          this.articleForm.get('title')?.setValue(res.article.title);
+          this.articleForm
+            .get('description')
+            ?.setValue(res.article.description);
+          this.articleForm.get('body')?.setValue(res.article.body);
+          this.articleForm
+            .get('tagList')
+            ?.setValue(res.article.tagList.join(' '));
+
+          this.loading = false;
+        });
     });
   }
 
@@ -38,15 +67,28 @@ export class EditorPageComponent implements OnInit {
       tagList = tagList.split(' ').filter((tag: string) => !!tag);
     }
 
-    this.articleServ
-      .createArticle(title, description, body, tagList)
-      .subscribe({
-        next: (res: ArticleResponse) =>
-          this.router.navigate([`/article/${res.article.slug}`]),
-        error: (httpErr: HttpErrorResponse) => {
-          this.error = httpErr;
-          this.loading = false;
-        },
-      });
+    if (!this.slug) {
+      this.articleServ
+        .createArticle(title, description, body, tagList)
+        .subscribe({
+          next: (res: ArticleResponse) =>
+            this.router.navigate([`/article/${res.article.slug}`]),
+          error: (httpErr: HttpErrorResponse) => {
+            this.error = httpErr;
+            this.loading = false;
+          },
+        });
+    } else {
+      this.articleServ
+        .updateArticle(this.slug, title, description, body)
+        .subscribe({
+          next: (res: ArticleResponse) =>
+            this.router.navigate([`/article/${res.article.slug}`]),
+          error: (httpErr: HttpErrorResponse) => {
+            this.error = httpErr;
+            this.loading = false;
+          },
+        });
+    }
   }
 }

@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ErrorsListComponent implements OnInit {
   @Input('error') set error(httpError: HttpErrorResponse | undefined) {
-    if (!httpError) {
+    if (!httpError || httpError.status !== 422) {
       return;
     }
 

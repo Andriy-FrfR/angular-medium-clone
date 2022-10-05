@@ -40,6 +40,11 @@ const routes: Routes = [
     component: EditorPageComponent,
     canActivate: [NotAuthenticatedGuard],
   },
+  {
+    path: 'editor/:slug',
+    component: EditorPageComponent,
+    canActivate: [NotAuthenticatedGuard],
+  },
   { path: '**', redirectTo: '/' },
 ];
 

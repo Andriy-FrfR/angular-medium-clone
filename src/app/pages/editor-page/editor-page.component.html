@@ -29,7 +29,7 @@
                 formControlName="body"
               ></textarea>
             </fieldset>
-            <fieldset class="form-group">
+            <fieldset class="form-group" *ngIf="!slug">
               <input
                 type="text"
                 class="form-control"
