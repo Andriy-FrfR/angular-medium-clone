@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ArticleResponse } from './../../shared/interfaces/article-response.interface';
@@ -19,7 +20,8 @@ export class EditorPageComponent implements OnInit {
   constructor(
     private articleServ: ArticlesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authServ: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,12 @@ export class EditorPageComponent implements OnInit {
 
       this.articleServ.getArticleBySlug(params['slug']).subscribe({
         next: (res: ArticleResponse) => {
+          if (
+            res.article.author.username !== this.authServ.currentUser?.username
+          ) {
+            this.router.navigate(['/']);
+          }
+
           this.articleForm.get('title')?.setValue(res.article.title);
           this.articleForm
             .get('description')
@@ -52,7 +60,7 @@ export class EditorPageComponent implements OnInit {
           this.loading = false;
         },
         error: (err: HttpErrorResponse) => {
-          if (err.status === 404 || err.status === 403) {
+          if (err.status === 404) {
             this.router.navigate(['/']);
           }
         },
