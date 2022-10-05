@@ -8,7 +8,11 @@ import { AuthService } from '../services/auth.service';
 export class AlreadyAuthenticatedGuard implements CanActivate {
   constructor(private authServ: AuthService, private router: Router) {}
 
-  canActivate(): Observable<boolean> {
+  canActivate(): boolean | Observable<boolean> {
+    if (this.authServ.isAuthenticated()) {
+      return false;
+    }
+
     return this.authServ.getCurrentUser().pipe(
       switchMap(() => {
         return new Observable((subscriber: Subscriber<boolean>) => {
