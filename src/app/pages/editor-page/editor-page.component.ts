@@ -38,9 +38,8 @@ export class EditorPageComponent implements OnInit {
       this.slug = params['slug'];
       this.loading = true;
 
-      this.articleServ
-        .getArticleBySlug(params['slug'])
-        .subscribe((res: ArticleResponse) => {
+      this.articleServ.getArticleBySlug(params['slug']).subscribe({
+        next: (res: ArticleResponse) => {
           this.articleForm.get('title')?.setValue(res.article.title);
           this.articleForm
             .get('description')
@@ -51,7 +50,13 @@ export class EditorPageComponent implements OnInit {
             ?.setValue(res.article.tagList.join(' '));
 
           this.loading = false;
-        });
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 404 || err.status === 403) {
+            this.router.navigate(['/']);
+          }
+        },
+      });
     });
   }
 

@@ -33,8 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
           if (!req.headers.has('skipAuthInterceptor')) {
             this.router.navigate(['/']);
           }
-        } else if (err.status === 404) {
-          this.router.navigate(['/']);
         }
 
         return throwError(() => err);
