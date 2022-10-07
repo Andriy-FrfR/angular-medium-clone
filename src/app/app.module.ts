@@ -28,6 +28,8 @@ import { CommentsComponent } from './pages/article-page/components/comments/comm
 import { ErrorsListComponent } from './shared/components/errors-list/errors-list.component';
 import { DeleteArticleButtonComponent } from './shared/components/delete-article-button/delete-article-button.component';
 import { LogoutButtonComponent } from './shared/components/logout-button/logout-button.component';
+import { FavoritedArticlesComponent } from './pages/profile-page/components/favorited-articles/favorited-articles.component';
+import { MyArticlesComponent } from './pages/profile-page/components/my-articles/my-articles.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { LogoutButtonComponent } from './shared/components/logout-button/logout-
     ErrorsListComponent,
     DeleteArticleButtonComponent,
     LogoutButtonComponent,
+    FavoritedArticlesComponent,
+    MyArticlesComponent,
   ],
   imports: [
     BrowserModule,

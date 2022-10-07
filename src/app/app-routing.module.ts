@@ -1,3 +1,5 @@
+import { FavoritedArticlesComponent } from './pages/profile-page/components/favorited-articles/favorited-articles.component';
+import { MyArticlesComponent } from './pages/profile-page/components/my-articles/my-articles.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
@@ -19,6 +21,10 @@ const routes: Routes = [
   {
     path: 'profile/:username',
     component: ProfilePageComponent,
+    children: [
+      { path: '', component: MyArticlesComponent },
+      { path: 'favorites', component: FavoritedArticlesComponent },
+    ],
   },
   {
     path: 'login',

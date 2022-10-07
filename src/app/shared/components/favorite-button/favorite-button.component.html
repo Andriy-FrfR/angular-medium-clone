@@ -1,6 +1,5 @@
 <button
   class="btn btn-outline-primary btn-sm"
-  [class.pull-xs-right]="isInFeed"
   [class.active]="article.favorited"
   [class.disabled]="loading"
   (click)="toggleFavorited()"

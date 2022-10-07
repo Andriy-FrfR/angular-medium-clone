@@ -57,7 +57,7 @@ export class HomePageComponent implements OnInit {
   fetchGlobalFeed(): void {
     this.prepareForFetching(FeedName.GlobalFeed);
 
-    this.articlesServ.getGlobalFeed().subscribe({
+    this.articlesServ.getFeed().subscribe({
       next: (res: ArticlesResponse) => {
         this.articles = res.articles;
         this.loading = false;
@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit {
     this.prepareForFetching(FeedName.TagFeed);
     this.activeTag = tag;
 
-    this.articlesServ.getArticlesByTag(tag).subscribe({
+    this.articlesServ.getFeed({ tag }).subscribe({
       next: (res: ArticlesResponse) => {
         this.articles = res.articles;
         this.loading = false;

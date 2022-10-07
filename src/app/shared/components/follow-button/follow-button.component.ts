@@ -1,3 +1,4 @@
+import { Profile } from './../../interfaces/profile.interface';
 import { ProfileResponse } from './../../interfaces/profile-response.interface';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./follow-button.component.scss'],
 })
 export class FollowButtonComponent implements OnInit {
-  @Input('article') article!: Article;
+  @Input('profile') profile!: Profile;
   loading = false;
 
   constructor(
@@ -30,18 +31,18 @@ export class FollowButtonComponent implements OnInit {
 
     this.loading = true;
 
-    if (this.article.author.following) {
-      this.profileServ.unfollowUser(this.article.author.username).subscribe({
+    if (this.profile.following) {
+      this.profileServ.unfollowUser(this.profile.username).subscribe({
         next: (res: ProfileResponse) => {
-          Object.assign(this.article.author, res.profile);
+          Object.assign(this.profile, res.profile);
           this.loading = false;
         },
         error: () => (this.loading = false),
       });
     } else {
-      this.profileServ.followUser(this.article.author.username).subscribe({
+      this.profileServ.followUser(this.profile.username).subscribe({
         next: (res: ProfileResponse) => {
-          Object.assign(this.article.author, res.profile);
+          Object.assign(this.profile, res.profile);
           this.loading = false;
         },
         error: () => (this.loading = false),

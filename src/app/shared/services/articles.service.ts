@@ -52,24 +52,6 @@ export class ArticlesService {
     );
   }
 
-  getGlobalFeed(): Observable<ArticlesResponse> {
-    return this.http.get<ArticlesResponse>(
-      `${environment.apiBaseUrl}/articles`
-    );
-  }
-
-  getYourFeed(): Observable<ArticlesResponse> {
-    return this.http.get<ArticlesResponse>(
-      `${environment.apiBaseUrl}/articles/feed`
-    );
-  }
-
-  getArticlesByTag(tag: string): Observable<ArticlesResponse> {
-    return this.http.get<ArticlesResponse>(
-      `${environment.apiBaseUrl}/articles?tag=${tag}`
-    );
-  }
-
   favoriteArticle(slug: string): Observable<ArticleResponse> {
     return this.http.post<ArticleResponse>(
       `${environment.apiBaseUrl}/articles/${slug}/favorite`,
@@ -81,5 +63,31 @@ export class ArticlesService {
     return this.http.delete<ArticleResponse>(
       `${environment.apiBaseUrl}/articles/${slug}/favorite`
     );
+  }
+
+  getFeed(queryParams?: {
+    tag?: string;
+    author?: string;
+    favorited?: string;
+  }): Observable<ArticlesResponse> {
+    return this.http.get<ArticlesResponse>(
+      this.addQueryParams(`${environment.apiBaseUrl}/articles`, queryParams)
+    );
+  }
+
+  getYourFeed(): Observable<ArticlesResponse> {
+    return this.http.get<ArticlesResponse>(
+      `${environment.apiBaseUrl}/articles/feed`
+    );
+  }
+
+  private addQueryParams(url: string, queryParams?: { [key: string]: string }) {
+    if (!queryParams) return url;
+
+    const queryString = Object.entries(queryParams)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&');
+
+    return `${url}?${queryString}`;
   }
 }

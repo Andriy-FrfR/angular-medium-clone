@@ -17,7 +17,10 @@
         {{ article.createdAt | date: "MMMM dd, yyyy" }}
       </span>
     </div>
-    <app-favorite-button [article]="article"></app-favorite-button>
+    <app-favorite-button
+      [article]="article"
+      class="pull-xs-right"
+    ></app-favorite-button>
   </div>
   <a [routerLink]="'/article/' + article.slug" class="preview-link">
     <h1>{{ article.title }}</h1>

@@ -22,7 +22,7 @@
         <ng-template
           [ngIf]="authServ.currentUser?.username !== article.author.username"
         >
-          <app-follow-button [article]="article"></app-follow-button>
+          <app-follow-button [profile]="article.author"></app-follow-button>
           &nbsp;
           <app-favorite-button
             [article]="article"
@@ -87,7 +87,7 @@
         <ng-template
           [ngIf]="authServ.currentUser?.username !== article.author.username"
         >
-          <app-follow-button [article]="article"></app-follow-button>
+          <app-follow-button [profile]="article.author"></app-follow-button>
           &nbsp;
           <app-favorite-button
             [article]="article"
