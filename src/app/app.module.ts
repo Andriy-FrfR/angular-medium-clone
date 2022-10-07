@@ -16,7 +16,7 @@ import { EditorPageComponent } from './pages/editor-page/editor-page.component';
 import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
-import { ArticlesComponent } from './pages/home-page/components/articles/articles.component';
+import { ArticlesComponent } from './shared/components/articles/articles.component';
 import { LogInterceptor } from './shared/interceptors/log.interceptor';
 import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/feed-toggle.component';
 import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component';
