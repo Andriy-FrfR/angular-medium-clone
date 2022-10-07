@@ -27,6 +27,7 @@ import { CommentFormComponent } from './pages/article-page/components/comment-fo
 import { CommentsComponent } from './pages/article-page/components/comments/comments.component';
 import { ErrorsListComponent } from './shared/components/errors-list/errors-list.component';
 import { DeleteArticleButtonComponent } from './shared/components/delete-article-button/delete-article-button.component';
+import { LogoutButtonComponent } from './shared/components/logout-button/logout-button.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DeleteArticleButtonComponent } from './shared/components/delete-article
     CommentsComponent,
     ErrorsListComponent,
     DeleteArticleButtonComponent,
+    LogoutButtonComponent,
   ],
   imports: [
     BrowserModule,
