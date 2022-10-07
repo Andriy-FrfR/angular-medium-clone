@@ -1,3 +1,5 @@
+import { UpdateUser } from './../interfaces/update-user.interface';
+import { User } from './../interfaces/user.interface';
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -19,5 +21,11 @@ export class ProfileService {
     return this.http.delete<ProfileResponse>(
       `${environment.apiBaseUrl}/profiles/${username}/follow`
     );
+  }
+
+  updateUser(updateUser: UpdateUser): Observable<User> {
+    return this.http.put<User>(`${environment.apiBaseUrl}/user`, {
+      user: updateUser,
+    });
   }
 }

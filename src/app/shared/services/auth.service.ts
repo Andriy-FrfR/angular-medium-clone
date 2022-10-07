@@ -4,6 +4,7 @@ import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -33,6 +34,11 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.currentUser;
+  }
+
+  logout(): void {
+    this.removeToken();
+    this.removeCurrentUser();
   }
 
   register(
