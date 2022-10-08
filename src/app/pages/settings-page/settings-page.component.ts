@@ -1,3 +1,4 @@
+import { UpdateUser } from './../../shared/interfaces/update-user.interface';
 import { ProfileService } from './../../shared/services/profile.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -29,8 +30,8 @@ export class SettingsPageComponent {
   onSubmit(): void {
     this.loading = true;
 
-    const updateData = {
-      picture: this.updateUserForm.get('picture')?.value,
+    const updateData: UpdateUser = {
+      image: this.updateUserForm.get('picture')?.value,
       username: this.updateUserForm.get('username')?.value,
       bio: this.updateUserForm.get('bio')?.value,
       email: this.updateUserForm.get('email')?.value,

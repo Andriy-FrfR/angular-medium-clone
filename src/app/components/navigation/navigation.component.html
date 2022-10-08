@@ -12,27 +12,45 @@
         >
       </li>
 
-      <li class="nav-item" *ngIf="authServ.isAuthenticated()">
-        <a class="nav-link" routerLink="/editor" routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;New Article
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="authServ.isAuthenticated()">
-        <a class="nav-link" routerLink="/settings" routerLinkActive="active">
-          <i class="ion-gear-a"></i>&nbsp;Settings
-        </a>
-      </li>
+      <ng-template [ngIf]="authServ.isAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+            <i class="ion-compose"></i>&nbsp;New Article
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/settings" routerLinkActive="active">
+            <i class="ion-gear-a"></i>&nbsp;Settings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="'/profile/' + authServ.currentUser?.username"
+            routerLinkActive="active"
+          >
+            <img
+              src="{{ authServ.currentUser?.image }}"
+              class="user-pic"
+              alt="User picture"
+            />
+            {{ authServ.currentUser?.username }}
+          </a>
+        </li>
+      </ng-template>
 
-      <li class="nav-item" *ngIf="!authServ.isAuthenticated()">
-        <a class="nav-link" routerLink="/login" routerLinkActive="active"
-          >Sign in</a
-        >
-      </li>
-      <li class="nav-item" *ngIf="!authServ.isAuthenticated()">
-        <a class="nav-link" routerLink="/register" routerLinkActive="active"
-          >Sign up</a
-        >
-      </li>
+      <ng-template [ngIf]="!authServ.isAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active"
+            >Sign in</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register" routerLinkActive="active"
+            >Sign up</a
+          >
+        </li>
+      </ng-template>
     </ul>
   </div>
 </nav>
