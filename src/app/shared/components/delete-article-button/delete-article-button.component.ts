@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
-import { ArticlesService } from './../../services/articles.service';
-import { Article } from './../../interfaces/article.interface';
 import { Component, Input, OnInit } from '@angular/core';
+import { ArticlesService } from 'src/app/modules/articles/services/articles.service';
+import { Article } from 'src/app/modules/articles/interfaces/article.interface';
 
 @Component({
   selector: 'app-delete-article-button',

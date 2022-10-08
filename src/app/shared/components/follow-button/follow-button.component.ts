@@ -1,9 +1,8 @@
-import { Profile } from './../../interfaces/profile.interface';
-import { ProfileResponse } from './../../interfaces/profile-response.interface';
-import { AuthService } from './../../services/auth.service';
+import { Profile } from '../../../modules/profile/interfaces/profile.interface';
+import { ProfileResponse } from '../../../modules/profile/interfaces/profile-response.interface';
+import { AuthService } from '../../../modules/auth/services/auth.service';
 import { Router } from '@angular/router';
-import { ProfileService } from './../../services/profile.service';
-import { Article } from './../../interfaces/article.interface';
+import { ProfileService } from '../../../modules/profile/services/profile.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({

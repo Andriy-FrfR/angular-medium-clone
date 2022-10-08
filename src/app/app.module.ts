@@ -1,67 +1,20 @@
-import { NotAuthenticatedGuard } from './shared/guards/not-authenticated.guard';
+import { SharedModule } from './shared/shared.module';
+import { NotAuthenticatedGuard } from './modules/auth/guards/not-authenticated.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { EditorPageComponent } from './pages/editor-page/editor-page.component';
-import { AlreadyAuthenticatedGuard } from './shared/guards/already-authenticated.guard';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { SidebarComponent } from './pages/home-page/components/sidebar/sidebar.component';
-import { ArticlesComponent } from './shared/components/articles/articles.component';
+import { AlreadyAuthenticatedGuard } from './modules/auth/guards/already-authenticated.guard';
+import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
 import { LogInterceptor } from './shared/interceptors/log.interceptor';
-import { FeedToggleComponent } from './pages/home-page/components/feed-toggle/feed-toggle.component';
-import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component';
-import { ArticlePageComponent } from './pages/article-page/article-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { FollowButtonComponent } from './shared/components/follow-button/follow-button.component';
-import { CommentFormComponent } from './pages/article-page/components/comment-form/comment-form.component';
-import { CommentsComponent } from './pages/article-page/components/comments/comments.component';
-import { ErrorsListComponent } from './shared/components/errors-list/errors-list.component';
-import { DeleteArticleButtonComponent } from './shared/components/delete-article-button/delete-article-button.component';
-import { LogoutButtonComponent } from './shared/components/logout-button/logout-button.component';
-import { FavoritedArticlesComponent } from './pages/profile-page/components/favorited-articles/favorited-articles.component';
-import { MyArticlesComponent } from './pages/profile-page/components/my-articles/my-articles.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    FooterComponent,
-    HomePageComponent,
-    RegisterPageComponent,
-    LoginPageComponent,
-    SettingsPageComponent,
-    EditorPageComponent,
-    SidebarComponent,
-    ArticlesComponent,
-    FeedToggleComponent,
-    FavoriteButtonComponent,
-    ArticlePageComponent,
-    ProfilePageComponent,
-    FollowButtonComponent,
-    CommentFormComponent,
-    CommentsComponent,
-    ErrorsListComponent,
-    DeleteArticleButtonComponent,
-    LogoutButtonComponent,
-    FavoritedArticlesComponent,
-    MyArticlesComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
+  declarations: [AppComponent, NavigationComponent, FooterComponent],
+  imports: [BrowserModule, AppRoutingModule, SharedModule],
   providers: [
     NotAuthenticatedGuard,
     AlreadyAuthenticatedGuard,
