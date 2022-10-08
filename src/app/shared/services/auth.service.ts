@@ -4,7 +4,7 @@ import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { ThrowStmt } from '@angular/compiler';
+import { UpdateUser } from '../interfaces/update-user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -71,5 +71,13 @@ export class AuthService {
         headers: { skipAuthInterceptor: 'skip' },
       })
       .pipe(tap(this.setUser.bind(this)));
+  }
+
+  updateUser(updateUser: UpdateUser): Observable<UserResponse> {
+    return this.http
+      .put<UserResponse>(`${environment.apiBaseUrl}/user`, {
+        user: updateUser,
+      })
+      .pipe(tap(this.setToken), tap(this.setUser.bind(this)));
   }
 }

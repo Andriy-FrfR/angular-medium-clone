@@ -21,11 +21,7 @@ export class SettingsPageComponent {
 
   loading = false;
 
-  constructor(
-    private authServ: AuthService,
-    private profileServ: ProfileService,
-    private router: Router
-  ) {}
+  constructor(private authServ: AuthService, private router: Router) {}
 
   onSubmit(): void {
     this.loading = true;
@@ -38,10 +34,11 @@ export class SettingsPageComponent {
       password: this.updateUserForm.get('password')?.value,
     };
 
-    this.profileServ.updateUser(updateData).subscribe({
+    this.authServ.updateUser(updateData).subscribe({
       next: () => {
-        this.authServ.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate([
+          `/profile/${this.authServ.currentUser?.username}`,
+        ]);
       },
       error: () => {
         this.loading = false;
